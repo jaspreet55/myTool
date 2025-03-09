@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Compression</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header */
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .menu a {
+            color: white;
+            font-size: 16px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .menu a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Hamburger Menu for Mobile */
+        .menu-icon {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .menu {
+                display: none;
+                flex-direction: column;
+                background-color: #007BFF;
+                position: absolute;
+                top: 60px;
+                right: 20px;
+                padding: 10px;
+                border-radius: 5px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .menu.active {
+                display: flex;
+            }
+
+            .menu-icon {
+                display: block;
+            }
+        }
+
+        /* Body - Service Cards */
+        .services {
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #007BFF;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: #007BFF;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+ h1 {
+            text-align: center;
+            color: #007BFF;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Upload Section */
+        .upload-section {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .upload-section:hover {
+            border-color: #007BFF;
+            background-color: #f9f9f9;
+        }
+
+        .upload-section input[type="file"] {
+            display: none;
+        }
+
+        .upload-section label {
+            font-size: 16px;
+            color: #007BFF;
+            cursor: pointer;
+        }
+
+        /* Image Preview */
+        .image-preview {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .image-preview img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Compression Options */
+        .options {
+            margin-bottom: 20px;
+        }
+
+        .options label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .options input[type="range"] {
+            width: 100%;
+        }
+
+        /* Buttons */
+        .buttons {
+            text-align: center;
+        }
+
+        .buttons button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 5px;
+        }
+
+        .buttons button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Download Link */
+        .download-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .download-link a {
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .download-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+
+            .upload-section {
+                padding: 15px;
+            }
+
+            .buttons button {
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">MyTool</div>
+        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        <nav class="menu">
+            <a href="#image-compression">Image Compression</a>
+            <a href="#word-to-pdf">Word to PDF Converter</a>
+            <a href="#pdf-to-word">PDF to Word Converter</a>
+        </nav>
+    </header>
+
+    <h1>Image Compression Tool</h1>
+    <div class="container">
+        <!-- Upload Section -->
+        <div class="upload-section">
+            <input type="file" id="fileInput" accept="image/*" />
+            <label for="fileInput">Click to Upload Image</label>
+        </div>
+
+        <!-- Image Preview -->
+        <div class="image-preview">
+            <img id="preview" src="#" alt="Image Preview" style="display: none;" />
+        </div>
+
+        <!-- Compression Options -->
+        <div class="options">
+            <label for="quality">Compression Quality: <span id="qualityValue">80</span>%</label>
+            <input type="range" id="quality" min="1" max="100" value="80" />
+        </div>
+
+        <!-- Buttons -->
+        <div class="buttons">
+            <button id="compressButton">Compress Image</button>
+            <button id="resetButton">Reset</button>
+        </div>
+
+        <!-- Download Link -->
+        <div class="download-link">
+            <a id="downloadLink" style="display: none;">Download Compressed Image</a>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const fileInput = document.getElementById('fileInput');
+        const preview = document.getElementById('preview');
+        const qualityInput = document.getElementById('quality');
+        const qualityValue = document.getElementById('qualityValue');
+        const compressButton = document.getElementById('compressButton');
+        const resetButton = document.getElementById('resetButton');
+        const downloadLink = document.getElementById('downloadLink');
+
+        // Event Listeners
+        fileInput.addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        qualityInput.addEventListener('input', function () {
+            qualityValue.textContent = this.value;
+        });
+
+        compressButton.addEventListener('click', function () {
+            const file = fileInput.files[0];
+            if (!file) {
+                alert('Please upload an image first.');
+                return;
+            }
+
+            const quality = qualityInput.value / 100;
+            compressImage(file, quality);
+        });
+
+        resetButton.addEventListener('click', function () {
+            fileInput.value = '';
+            preview.src = '#';
+            preview.style.display = 'none';
+            downloadLink.style.display = 'none';
+            qualityInput.value = 80;
+            qualityValue.textContent = 80;
+        });
+
+        // Image Compression Function
+        function compressImage(file, quality) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const img = new Image();
+                img.src = e.target.result;
+
+                img.onload = function () {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+
+                    // Set canvas dimensions
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+
+                    // Draw the image on the canvas
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                    // Convert canvas to compressed image
+                    canvas.toBlob(
+                        (blob) => {
+                            const url = URL.createObjectURL(blob);
+                            downloadLink.href = url;
+                            downloadLink.download = `compressed-${file.name}`;
+                            downloadLink.style.display = 'block';
+                            alert('Compression complete! Click "Download Compressed Image" to save your file.');
+                        },
+                        'image/jpeg',
+                        quality
+                    );
+                };
+            };
+            reader.readAsDataURL(file);
+        }
+    </script>
+</body>
+</html>
