@@ -121,7 +121,10 @@
             color: white;
             padding: 20px;
             text-align: center;
-            margin-top: 40px;
+            width: 100%;
+            position: fixed; /* Fixed footer */
+            bottom: 0;
+            left: 0;
         }
 
         footer p {
@@ -297,7 +300,24 @@
             <a id="downloadLink" style="display: none;">Download Compressed Image</a>
         </div>
     </div>
+  <!-- Footer -->
+    <footer>
+        <p>
+            &copy; 2023 MyTool. All rights reserved. | 
+            <a href="#privacy-policy">Privacy Policy</a>
+        </p>
+        <p>
+            Your privacy is important to us. We do not store or share your data without your consent.
+        </p>
+    </footer>
 
+    <script>
+        // Toggle Menu for Mobile
+        function toggleMenu() {
+            const menu = document.querySelector('.menu');
+            menu.classList.toggle('active');
+        }
+    </script>
     <script>
         // DOM Elements
         const fileInput = document.getElementById('fileInput');
