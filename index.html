@@ -12,6 +12,9 @@
             padding: 0;
             background-color: #f4f4f9;
             color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure footer sticks to the bottom */
         }
 
         a {
@@ -88,6 +91,7 @@
             flex-wrap: wrap;
             gap: 20px;
             justify-content: center;
+            flex: 1; /* Push footer to the bottom */
         }
 
         .card {
@@ -95,23 +99,29 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 300px;
-            padding: 20px;
+            padding: 30px; /* Increased padding */
             text-align: center;
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 250px; /* Increased height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px); /* More pronounced hover effect */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
         }
 
         .card h2 {
-            font-size: 20px;
-            margin-bottom: 10px;
+            font-size: 24px; /* Larger font size */
+            margin-bottom: 15px;
             color: #007BFF;
         }
 
         .card p {
-            font-size: 14px;
+            font-size: 16px; /* Larger font size */
             color: #666;
         }
 
@@ -121,7 +131,10 @@
             color: white;
             padding: 20px;
             text-align: center;
-            margin-top: 40px;
+            width: 100%;
+            position: fixed; /* Fixed footer */
+            bottom: 0;
+            left: 0;
         }
 
         footer p {
@@ -153,19 +166,23 @@
     <!-- Body - Service Cards -->
     <section class="services">
         <a href="/myTool/image-compression.html">
-        <div class="card">
-            <h2>Image Compression</h2>
-            <p>Compress your images without losing quality. Reduce file size for faster sharing and storage.</p>
-        </div>
+            <div class="card">
+                <h2>Image Compression</h2>
+                <p>Compress your images without losing quality. Reduce file size for faster sharing and storage.</p>
+            </div>
         </a>
-        <div class="card">
-            <h2>Word to PDF Converter</h2>
-            <p>Convert Word documents to PDF format while preserving the original layout and formatting.</p>
-        </div>
-        <div class="card">
-            <h2>PDF to Word Converter</h2>
-            <p>Convert PDF files to editable Word documents with ease.</p>
-        </div>
+        <a href="#word-to-pdf">
+            <div class="card">
+                <h2>Word to PDF Converter</h2>
+                <p>Convert Word documents to PDF format while preserving the original layout and formatting.</p>
+            </div>
+        </a>
+        <a href="#pdf-to-word">
+            <div class="card">
+                <h2>PDF to Word Converter</h2>
+                <p>Convert PDF files to editable Word documents with ease.</p>
+            </div>
+        </a>
     </section>
 
     <!-- Footer -->
